@@ -1,37 +1,27 @@
 <?php
-session_start();
 include 'config.php';
 
 if(isset($_POST['submit'])){
-
-   $cname = mysqli_real_escape_string($conn, $_POST['cname']);
-   $ccode = mysqli_real_escape_string($conn, $_POST['ccode']);
-   $cexam =$_POST['cexam'];
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $labstatus = mysqli_real_escape_string($conn, $_POST['labstatus']);
+   $cname = $_POST['cname'];
+   $ccode = $_POST['ccode'];
+   $cexam = $_POST['cexam'];
+   $email = $_POST['email'];
+   $labstatus = $_POST['labstatus'];
    $status = "false";
-
-   $select= mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email'") or die('query failed');
+   $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email'") or die('query failed 1');
    $result = mysqli_fetch_assoc($select);
-
-   $select1 = mysqli_query($conn, "SELECT * FROM `courses` WHERE ccode = '$ccode'");
-   $result1 = mysqli_fetch_assoc($select1);
-
    $teacher_id = $result['id'];
-
-   if(mysqli_num_rows($result1)>0){
-      $message[] = "Course Already Taken";
-   }
-   else{
-      $insert = mysqli_query($conn, "INSERT INTO `courses`(name,course_code,course_exam_number, labstatus,course_teacher_id, course_status) VALUES('$cname', '$ccode','$cexam','$labstatus','$status','$teacher_id')") or die('query failed');
-      $insert1= mysqli_fetch_assoc($insert);
-      if(mysqli_num_rows($insert1)>0){
-         header('location:home.php');
-      }else{
+   echo $teacher_id ;   
+   $insert = mysqli_query($conn, "INSERT INTO `courses` (cname, ccode, cenumber, labstatus, tid) VALUES ('$cname', '$ccode', '$cexam', '$labstatus', '$teacher_id')") or die('query failed 2');
+    if ($insert) {
+      $select1 = mysqli_query($conn,"SELECT * FROM `courses` WHERE tid = '$teacher_id'") or die('query failed1');
+      $total= mysqli_num_rows($select1);
+      mysqli_query($conn, "UPDATE user_form SET total_number_courses = '$total'");
+      header('location:home.php');
+    } else {
+         $message[] = "Query Failed";
          header('location:course_reg.php');
-      }
    }
-
 
 }
 
@@ -53,7 +43,7 @@ if(isset($_POST['submit'])){
    
 <div class="form-container">
 
-   <form action="home.php" method="post" enctype="multipart/form-data">
+   <form action="#" method="post" enctype="multipart/form-data">
       <div>
          <div>
             <img src="images/du.png" alt="DU Logo" height="100px" width="80px">

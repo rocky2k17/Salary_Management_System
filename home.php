@@ -3,7 +3,6 @@
 include 'config.php';
 session_start();
 $user_id = $_SESSION['user_id'];
-
 if(!isset($user_id)){
    header('location:login.php');
 };
@@ -44,17 +43,17 @@ if(isset($_GET['logout'])){
    <div class="sidebar">
       <a href="home.php" style="background-color:#3399ff;"><i class="fas fa-user"></i><span>Personal Information</span></a>
       <a href="course_management.php"><i class="fas fa-table"></i><span>Course Management</span></a>
-      <a href="#"><i class="fas fa-file"></i><span>Salary Management</span></a>
+      <a href="salary_management.php"><i class="fas fa-file"></i><span>Salary Management</span></a>
       
    </div>
    <div class="container1">
 
       <div class="profile1">
          <?php
-            $select1 = mysqli_query($conn,"SELECT * FROM `courses` WHERE course_teacher_id = '$user_id'") or die('query failed');
-            $total= mysqli_num_rows($select1);
-            mysqli_query($conn, "UPDATE user_form SET total_number_courses = '$total'");
-            $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE id = '$user_id'") or die('query failed');
+            $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$user_id'") or die('query failed 1');
+            $result = mysqli_fetch_assoc($select);          
+            $teacher_id = $result['id'];
+            $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$user_id'") or die('query failed');
 
             if(mysqli_num_rows($select) > 0){
                $fetch = mysqli_fetch_assoc($select);

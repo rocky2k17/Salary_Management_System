@@ -13,7 +13,8 @@ if(isset($_POST['submit'])){
    {
       $email_pass = mysqli_fetch_assoc($select);
       $db_pass = $email_pass['password'];
-      $_SESSION['user_id'] = $email_pass['id'];
+      $_SESSION['user_id'] = $email_pass['email'];
+      $message[] = $email_pass['email'];
       // $pass_decode = password_verify($pass, $db_pass);
       if($pass == $db_pass){
          if($email_pass['role'] == "Admin"){

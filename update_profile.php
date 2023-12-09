@@ -23,7 +23,8 @@ if(isset($_POST['update_profile'])){
 
    // $pquery = mysqli_query($conn,"SELECT * FROM `user_form` WHERE id = '$user_id' ")
    // $presult =mysqli_fetch_assoc($conn, $pquery)
-   $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE id = '$user_id'") or die('query failed');
+
+   $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$user_id'") or die('query failed');
    $fetch = mysqli_fetch_assoc($select);
 
    $rpass = $fetch['password'];
@@ -95,7 +96,7 @@ if(isset($_POST['update_profile'])){
 <div class="update-profile">
 
    <?php
-      $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE id = '$user_id'") or die('query failed');
+      $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$user_id'") or die('query failed');
       if(mysqli_num_rows($select) > 0){
          $fetch = mysqli_fetch_assoc($select);
       }
@@ -126,7 +127,6 @@ if(isset($_POST['update_profile'])){
             <input type="text" name="u_department" value="<?php echo $fetch['department']; ?>" class="box">
             <span>your mobile number :</span>
             <input type="text" name="u_mobile" value="<?php echo $fetch['mobile']; ?>" class="box">
-   
          </div>
          <div class="inputBox">
             <span>your permanent address :</span>

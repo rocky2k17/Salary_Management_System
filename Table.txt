@@ -20,23 +20,48 @@ CREATE TABLE `user_form` (
 CREATE TABLE `courses` (
   `cid`  int(255) NOT NULL AUTO_INCREMENT,
   `cname` varchar(100) NOT NULL,
-  `course_exam_number` int(100) NOT NULL,
-  `lab_status` varchar(100) NOT NULL,
-  `course_teacher_id` int NOT NULL,
+  `ccode` varchar(100) NOT NULL,
+  `cenumber` int(100) NOT NULL,
+  `labstatus` varchar(100) NOT NULL,
+  `tid` int NOT NULL,
   PRIMARY KEY (`cid`),
-  CONSTRAINT `fk_course_teacher_id`
-    FOREIGN KEY (`course_teacher_id`) REFERENCES `user_form`(`id`)
+  CONSTRAINT `fk_tid`
+    FOREIGN KEY (`tid`) REFERENCES `user_form`(`id`)
     ON DELETE CASCADE
     ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE `course_exam` (
-  `cid`  int(255) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `bill_management` (
+  `bid`  int(255) NOT NULL AUTO_INCREMENT,
+  `bmid` int NOT NULL,
+  `ename` varchar(100) NOT NULL,
+  `byear` varchar(100) NOT NULL,
   `cname` varchar(100) NOT NULL,
-  `cfaculty` varchar(100) NOT NULL,
-  `status` varchar(100) NOT NULL,
-  PRIMARY KEY (`cid`)
+  `qmfnumber` int(100) NOT NULL,
+  `qmfnumberbdt` int(100) NOT NULL,
+  `qmhnumber` int(100) NOT NULL,
+  `qmhnumberbdt` int(100) NOT NULL,
+  `avfnumber` int(100) NOT NULL,
+  `avfnumberbdt` int(100) NOT NULL,
+  `avhnumber` int(100) NOT NULL,
+  `avhnumberbdt` int(100) NOT NULL,
+  `pecenter` int(100) NOT NULL,
+  `penumber` int(100) NOT NULL,
+  `penumberbdt` int(100) NOT NULL,
+  `vcenter` int(100) NOT NULL,
+  `vnumber` int(100) NOT NULL,
+  `vnumberbdt` int(100) NOT NULL,
+  `rmnumber` int(100) NOT NULL,
+  `rmnumberbdt` int(100) NOT NULL,
+  `irnumber` int(100) NOT NULL,
+  `irnumberbdt` int(100) NOT NULL,
+  `oamount` int(100) NOT NULL,
+  PRIMARY KEY (`bid`),
+  CONSTRAINT `fk_bmid`
+    FOREIGN KEY (`bmid`) REFERENCES `user_form`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 

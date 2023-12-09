@@ -97,23 +97,71 @@ if(isset($_GET['logout'])){
                   Number of students
                </td>
                <td> 
-                  Amount
+                  Amount(Per Student)
                </td>
                <td> 
                   Name of center(Viva)
                </td>
                <td> 
+                  Number of students
+               </td>
+               <td> 
+                  Amount(Per Student)
+               </td>
+               <td> 
                   Number of students(Result Making)
                </td>
                <td> 
-                  Amount
+                  Amount(Per Student)
+               </td>
+               <td> 
+                  Number of students(Inspection of Result)
+               </td>
+               <td> 
+                  Amount(Per Student)
                </td>
                <td> 
                   Other Bills
                </td>
-
             </tr>
          </thead>
+         <tbody>
+            <?php
+               $select = mysqli_query($conn, "SELECT * FROM `bill_management`") or die('query failed');
+               if(mysqli_num_rows($select) > 0){
+                  while($fetch = mysqli_fetch_assoc($select)){
+                     echo '<tr>';
+                     echo '<td>'.$fetch['ename'].'</td>';
+                     echo '<td>'.$fetch['byear'].'</td>';
+                     echo '<td>'.$fetch['cname'].'</td>';
+                     echo '<td>'.$fetch['qmfnumber'].'</td>';
+                     echo '<td>'.$fetch['qmfnumberbdt'].'</td>';
+                     echo '<td>'.$fetch['qmhnumber'].'</td>';
+                     echo '<td>'.$fetch['qmhnumberbdt'].'</td>';
+                     echo '<td>'.$fetch['avfnumber'].'</td>';
+                     echo '<td>'.$fetch['avfnumberbdt'].'</td>';
+                     echo '<td>'.$fetch['avhnumber'].'</td>';
+                     echo '<td>'.$fetch['avhnumberbdt'].'</td>';
+                     echo '<td>'.$fetch['pecenter'].'</td>';
+                     echo '<td>'.$fetch['penumber'].'</td>';
+                     echo '<td>'.$fetch['penumberbdt'].'</td>';
+                     echo '<td>'.$fetch['vcenter'].'</td>';
+                     echo '<td>'.$fetch['vnumber'].'</td>';
+                     echo '<td>'.$fetch['vnumberbdt'].'</td>';
+                     echo '<td>'.$fetch['rmnumber'].'</td>';
+                     echo '<td>'.$fetch['rmnumberbdt'].'</td>';
+                     echo '<td>'.$fetch['irnumber'].'</td>';
+                     echo '<td>'.$fetch['irnumberbdt'].'</td>';
+                     echo '<td>'.$fetch['oamount'].'</td>';
+                     // echo '<td>'.$fetch['number_of_students_viva'].'</td>';
+                     // echo '<td>'.$fetch['amount_viva'].'</td>';
+                     // echo '<td>'.$fetch['other_bills'].'</td>';
+                     // 
+                     echo '</tr>';
+                  }
+               }
+            ?>
+         </tbody>
       </table>
       </div>
    </div>

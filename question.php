@@ -73,7 +73,7 @@ if(isset($_POST['submit'])){
          <input type="text" name="ename" placeholder="enter exam name" class="box" required>
          <input type="text" name="byear" placeholder="enter year of exam" class="box" required>
          <input type="text" name="cname" placeholder="enter course name" class="box" required>
-         <p>Question Making</p>
+         <p>Bill for Question Making</p>
          <div style="display: flex; flex-direction: row; gap:15px">
             <input type="number" name="qmfnumber" placeholder="enter number of full question" class="box" required>
             <input type="number" name="qmhnumberbdt" placeholder="enter amount for full question" class="box" required>

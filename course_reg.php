@@ -43,7 +43,7 @@ if(isset($_POST['submit'])){
    
 <div class="form-container">
 
-   <form action="#" method="post" enctype="multipart/form-data">
+   <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
       <div>
          <div>
             <img src="images/du.png" alt="DU Logo" height="100px" width="80px">

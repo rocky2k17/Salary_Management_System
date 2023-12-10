@@ -21,12 +21,11 @@ if(isset($_GET['logout'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>home</title>
+   <title>Home</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet" >
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="css/custom.css">
 
 </head>
 <body>
@@ -43,7 +42,7 @@ if(isset($_GET['logout'])){
    <div class="sidebar">
       <a href="home.php" style="background-color:#3399ff;"><i class="fas fa-user"></i><span>Personal Information</span></a>
       <a href="course_management.php"><i class="fas fa-table"></i><span>Course Management</span></a>
-      <a href="salary_management.php"><i class="fas fa-file"></i><span>Salary Management</span></a>
+      <a href="salary_management.php"><i class="fas fa-file"></i><span>Bill Management</span></a>
       
    </div>
    <div class="container1">
@@ -72,7 +71,6 @@ if(isset($_GET['logout'])){
          <h3 style="display: inline-block;">Email : <h4 style="display: inline-block;"><?php echo $fetch['email']; ?></h4></h3>
          <br>
          <a href="update_profile.php" class="btn" style="display:inline-block;">update personal info</a>
-         <a href="course_reg.php" class="btn" style="display:inline-block;">Registration for New Course</a>
          
       </div>
 

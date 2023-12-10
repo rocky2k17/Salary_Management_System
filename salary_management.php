@@ -21,7 +21,7 @@ if(isset($_GET['logout'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>home</title>
+   <title>Bill Management</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet" >
     <!-- custom css file link  -->
@@ -42,7 +42,7 @@ if(isset($_GET['logout'])){
    <div class="sidebar">
       <a href="home.php"><i class="fas fa-user"></i><span>Personal Information</span></a>
       <a href="course_management.php" ><i class="fas fa-table"></i><span>Course Management</span></a>
-      <a href="salary_management.php" style="background-color:#3399ff;"><i class="fas fa-file"></i><span>Salary Management</span></a>
+      <a href="salary_management.php" style="background-color:#3399ff;"><i class="fas fa-file"></i><span>Bill Management</span></a>
       
    </div>
    <div class="newContent">
@@ -57,6 +57,32 @@ if(isset($_GET['logout'])){
          <caption style="border: 3px solid black;">Bill Management Table</caption>
          <thead>
             <tr>
+               <td colspan ="3">
+                     Exam Details
+               </td>
+               <td colspan="4">
+                     Bill for Question Making
+               </td>
+               <td colspan="4">
+                  Bill for Answer Sheet Evaluation
+               </td>
+               <td colspan="3">
+                  Bill for Practical Exam
+               </td>
+               <td colspan="3">
+                  Bill for Viva
+               </td>
+               <td colspan="2">
+                  Bill for Result Making
+               </td>
+               <td colspan="2">
+                  Bill for Inspection of Result
+               </td>
+               <td >
+                  Other Bills
+               </td>
+            </tr>
+            <tr>
                <td>
                   Exam Name
                </td>
@@ -70,28 +96,28 @@ if(isset($_GET['logout'])){
                   Number of Full Question
                </td>
                <td>
-                  Amount(Full)
+                  Amount
                </td>
                <td>
                   Number of Half Question
                </td>
                <td>
+                  Amount
+               </td>
+               <td> 
+                  Total Number(Full)
+               </td>
+               <td> 
+                  Amount
+               </td>
+               <td> 
+                  Total Number
+               </td>
+               <td> 
                   Amount(Half)
                </td>
                <td> 
-                  Number of Answer Sheet Evaluation(Full)
-               </td>
-               <td> 
-                  Amount(Full)
-               </td>
-               <td> 
-                  Number of Answer Sheet Evaluation(Half)
-               </td>
-               <td> 
-                  Amount(Half)
-               </td>
-               <td> 
-                   Name of center(Practical)
+                   Name of center
                </td>
                <td> 
                   Number of students
@@ -100,7 +126,7 @@ if(isset($_GET['logout'])){
                   Amount(Per Student)
                </td>
                <td> 
-                  Name of center(Viva)
+                  Name of center
                </td>
                <td> 
                   Number of students
@@ -109,13 +135,13 @@ if(isset($_GET['logout'])){
                   Amount(Per Student)
                </td>
                <td> 
-                  Number of students(Result Making)
+                  Number of students
                </td>
                <td> 
                   Amount(Per Student)
                </td>
                <td> 
-                  Number of students(Inspection of Result)
+                  Number of students
                </td>
                <td> 
                   Amount(Per Student)
@@ -128,6 +154,7 @@ if(isset($_GET['logout'])){
          <tbody>
             <?php
                $select = mysqli_query($conn, "SELECT * FROM `bill_management`") or die('query failed');
+               $sum = 0;
                if(mysqli_num_rows($select) > 0){
                   while($fetch = mysqli_fetch_assoc($select)){
                      echo '<tr>';
@@ -135,9 +162,9 @@ if(isset($_GET['logout'])){
                      echo '<td>'.$fetch['byear'].'</td>';
                      echo '<td>'.$fetch['cname'].'</td>';
                      echo '<td>'.$fetch['qmfnumber'].'</td>';
-                     echo '<td>'.$fetch['qmfnumberbdt'].'</td>';
+                     echo '<td>' . ($fetch['qmfnumberbdt'] * $fetch['qmfnumber']) . '</td>';
                      echo '<td>'.$fetch['qmhnumber'].'</td>';
-                     echo '<td>'.$fetch['qmhnumberbdt'].'</td>';
+                     echo '<td>' . ($fetch['qmhnumberbdt'] * $fetch['qmhnumber']) . '</td>';
                      echo '<td>'.$fetch['avfnumber'].'</td>';
                      echo '<td>'.$fetch['avfnumberbdt'].'</td>';
                      echo '<td>'.$fetch['avhnumber'].'</td>';
@@ -157,10 +184,98 @@ if(isset($_GET['logout'])){
                      // echo '<td>'.$fetch['amount_viva'].'</td>';
                      // echo '<td>'.$fetch['other_bills'].'</td>';
                      // 
-                     echo '</tr>';
                   }
                }
             ?>
+            <tr>
+               <td colspan="3">Total</td>
+               <td colspan ="2">
+               <?php
+                  $select = mysqli_query($conn, "SELECT SUM(qmfnumber) AS total, qmfnumberbdt AS total1 FROM `bill_management`") or die('query failed');
+                  $fetch = mysqli_fetch_assoc($select);
+                  $result = $fetch['total'] * $fetch['total1'];
+                  $sum += $result;
+                  echo $result;
+               ?>
+
+               </td>
+               <td colspan ="2">
+                  <?php
+                     $select = mysqli_query($conn, "SELECT SUM(qmhnumber) AS total, qmhnumberbdt AS total1 FROM `bill_management`") or die('query failed');
+                     $fetch = mysqli_fetch_assoc($select);
+                     $result = $fetch['total'] * $fetch['total1'];
+                     $sum += $result;
+                     echo $result ." tk";
+                  ?>
+               </td>
+               <td colspan ="2">
+                  <?php
+                      $select = mysqli_query($conn, "SELECT SUM(avfnumber) AS total, avfnumberbdt AS total1 FROM `bill_management`") or die('query failed');
+                      $fetch = mysqli_fetch_assoc($select);
+                      $result = $fetch['total'] * $fetch['total1'];
+                      echo $result ." tk";
+                  ?>
+               </td>
+               <td colspan="2">
+                  <?php
+                      $select = mysqli_query($conn, "SELECT SUM(avhnumber) AS total, avhnumberbdt AS total1 FROM `bill_management`") or die('query failed');
+                      $fetch = mysqli_fetch_assoc($select);
+                      $result = $fetch['total'] * $fetch['total1'];
+                      $sum += $result;
+                      echo $result ." tk";
+                  ?>
+               </td>
+               <td colspan ="3">
+                  <?php
+                      $select = mysqli_query($conn, "SELECT SUM(penumber) AS total, penumberbdt AS total1 FROM `bill_management`") or die('query failed');
+                      $fetch = mysqli_fetch_assoc($select);
+                      $result = $fetch['total'] * $fetch['total1'];
+                      $sum += $result;
+                      echo $result ." tk";
+                  ?>
+               </td>
+               <td colspan ="3">
+                  <?php
+                     $select = mysqli_query($conn, "SELECT SUM(vnumber) AS total, vnumberbdt AS total1 FROM `bill_management`") or die('query failed');
+                     $fetch = mysqli_fetch_assoc($select);
+                     $result = $fetch['total'] * $fetch['total1'];
+                     $sum += $result;
+                     echo $result ." tk";
+                  ?>
+               </td>
+
+               <td colspan ="2">
+                  <?php
+                    $select = mysqli_query($conn, "SELECT SUM(rmnumber) AS total, rmnumberbdt AS total1 FROM `bill_management`") or die('query failed');
+                    $fetch = mysqli_fetch_assoc($select);
+                    $result = $fetch['total'] * $fetch['total1'];
+                     $sum += $result;
+                    echo $result ." tk";
+                  ?>
+               </td>
+
+               <td colspan="2">
+                  <?php
+                     $select = mysqli_query($conn, "SELECT SUM(irnumber) AS total, SUM(irnumberbdt) AS total1 FROM `bill_management`") or die('query failed');
+                     $fetch = mysqli_fetch_assoc($select);
+                     $result = $fetch['total'] * $fetch['total1'];
+                     $sum += $result;
+                     echo $result ." tk";
+                  ?>
+               </td>
+               <td>
+                  <?php
+                     $select = mysqli_query($conn, "SELECT SUM(oamount) AS total FROM `bill_management`") or die('query failed');
+                     $fetch = mysqli_fetch_assoc($select);
+                     $result = $fetch['total'];
+                     $sum += $result;
+                     echo $result ." tk";
+                  ?>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="23" >Total Bill   : <?php echo $sum; ?> tk</td>
+            </tr>
          </tbody>
       </table>
       </div>

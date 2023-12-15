@@ -76,7 +76,7 @@ if(isset($_POST['submit'])){
          <p>Bill for Question Making</p>
          <div style="display: flex; flex-direction: row; gap:15px">
             <input type="number" name="qmfnumber" placeholder="enter number of full question" class="box" required>
-            <input type="number" name="qmhnumberbdt" placeholder="enter amount for full question" class="box" required>
+            <input type="number" name="qmfnumberbdt" placeholder="enter amount for full question" class="box" required>
          </div>
          <div style="display: flex; flex-direction: row; gap:15px">
             <input type="number" name="qmhnumber" placeholder="enter number of half question" class="box" required>

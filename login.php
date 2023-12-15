@@ -4,7 +4,6 @@ include 'config.php';
 session_start();
 
 if(isset($_POST['submit'])){
-
    $email = $_POST['email'];
    $pass = $_POST['password'];
    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND status='active'") or die('query failed');

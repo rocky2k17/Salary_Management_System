@@ -99,13 +99,13 @@ if(isset($_POST['submit'])){
     </div>
       <input type="text" name="name" placeholder="enter username" class="box" required>
       <input type="email" name="email" placeholder="enter email" class="box" required>
-      <input type="designation" name="designation" placeholder="enter designation" class="box" required>
-      <input type="department" name="department" placeholder="enter department" class="box" required>
+      <input type="text" name="designation" placeholder="enter designation" class="box" required>
+      <input type="text" name="department" placeholder="enter department" class="box" required>
       <input type="number" name="mobile" placeholder="enter mobile number" class="box" required>
-      <input type="caddress" name="caddress" placeholder="enter current address" class="box" required>
-      <input type="paddress" name="paddress" placeholder="enter permanent address" class="box" required>
-      <input type="password" name="password" placeholder="enter password" class="box" required>
-      <input type="password" name="cpassword" placeholder="confirm password" class="box" required>
+      <input type="text" name="caddress" placeholder="enter current address" class="box" required>
+      <input type="text" name="paddress" placeholder="enter permanent address" class="box" required>
+      <input type="text" name="password" placeholder="enter password" class="box" required>
+      <input type="text" name="cpassword" placeholder="confirm password" class="box" required>
       <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png">
       <input type="submit" name="submit" value="register now" class="btn">
       <p>already have an account? <a href="login.php">login now</a></p>
